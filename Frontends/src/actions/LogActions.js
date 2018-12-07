@@ -24,7 +24,7 @@ export const loginUser = (user, history) => dispatch => {
       setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
-      history.push("./");
+      history.push("./myaccount");
     })
     .catch(err => {
       dispatch({
@@ -40,6 +40,14 @@ export const setCurrentUser = decoded => {
     payload: decoded
   };
 };
+
+export const logoutUser = history => dispatch => {
+  localStorage.removeItem("jwtToken");
+  setAuthToken(false);
+  dispatch(setCurrentUser({}));
+  history.push("/");
+};
+
 // So, from this file, we will send an AJAX request to the node.js server.
 // We can not write this code inside Reducer because otherwise,
 // it is a violation of pure function. So we need to write any database operations

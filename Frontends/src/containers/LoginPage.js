@@ -20,7 +20,6 @@ let LoginPage = props => {
         </div>
         <div>
           <label>Password</label>
-
           <Field
             placeholder="your password"
             component="input"
