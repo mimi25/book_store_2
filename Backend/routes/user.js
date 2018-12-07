@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const validateRegisterInput = require("../validation/register");
@@ -52,7 +52,6 @@ router.post("/login", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
   const email = req.body.email;
   const password = req.body.password;
 
@@ -84,7 +83,7 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        errors.password = "Incorrect Password";
+        errors.password = "Wrong Password";
         return res.status(400).json(errors);
       }
     });

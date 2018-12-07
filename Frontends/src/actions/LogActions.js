@@ -1,5 +1,7 @@
-import { GET_ERRORS } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 import axios from "axios";
+import setAuthToken from "../setAuthToken";
+import jwt_decode from "jwt-decode";
 
 export const registerUser = (user, history) => dispatch => {
   axios
@@ -13,11 +15,16 @@ export const registerUser = (user, history) => dispatch => {
     });
 };
 
-export const loginUser = user => dispatch => {
+export const loginUser = (user, history) => dispatch => {
   axios
     .post("api/users/login", user)
     .then(res => {
-      console.log(res.data);
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded));
+      history.push("./");
     })
     .catch(err => {
       dispatch({
@@ -27,6 +34,12 @@ export const loginUser = user => dispatch => {
     });
 };
 
+export const setCurrentUser = decoded => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
+};
 // So, from this file, we will send an AJAX request to the node.js server.
 // We can not write this code inside Reducer because otherwise,
 // it is a violation of pure function. So we need to write any database operations

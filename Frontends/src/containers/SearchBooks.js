@@ -1,7 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import { searchBook } from "../actions/booksActions";
-import { Button } from "reactstrap";
+import Button from "@material-ui/core/Button";
+
+// const suggestions = [
+//   { value: "react" },
+//   { value: "angular" },
+//   { value: "php" },
+//   { value: "java" },
+//   { value: "javascript" },
+//   { value: "web" },
+//   { value: "windows" },
+//   { value: "api" },
+//   { value: "ios" },
+//   { value: "node" },
+//   { value: "mongodb" }
+// ];
 
 const SearchBooks = ({ dispatch }) => {
   let input;
@@ -16,14 +30,13 @@ const SearchBooks = ({ dispatch }) => {
         }}
       >
         <input type="text" ref={node => (input = node)} />
-       
-        <Button type="submit">
+
+        <Button color="secondary" variant="contained" type="submit">
           Search
         </Button>
       </form>
     </div>
   );
 };
-
 
 export default connect()(SearchBooks);

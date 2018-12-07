@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchBooks, fetchBookDetails } from "../actions/booksActions";
+import Button from "@material-ui/core/Button";
 import {
   Card,
   CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
-  Button
+  CardSubtitle
 } from "reactstrap";
 
 class FetchBooks extends Component {
@@ -26,7 +26,11 @@ class FetchBooks extends Component {
           <CardSubtitle>{book.subtitle}</CardSubtitle>
           <CardText>{book.price}</CardText>
           <Link to={`/details/${book.isbn13}`}>
-            <Button onClick={() => this.props.fetchBookDetails(book.isbn13)}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => this.props.fetchBookDetails(book.isbn13)}
+            >
               more details
             </Button>
           </Link>
@@ -46,8 +50,9 @@ const mapStateToProps = state => ({
   books: state.books.books
 });
 
-const mapDispatchToProps =  {
-  fetchBookDetails, fetchBooks
+const mapDispatchToProps = {
+  fetchBookDetails,
+  fetchBooks
 };
 
 fetchBooks.propTypes = {

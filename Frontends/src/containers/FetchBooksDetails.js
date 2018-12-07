@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchBookDetails } from "../actions/booksActions";
 import { addToCart } from "../actions/cartActions";
-import { Button } from "reactstrap";
+import Button from "@material-ui/core/Button";
 
 class FetchBooksDetails extends Component {
   componentWillMount() {
@@ -14,7 +14,9 @@ class FetchBooksDetails extends Component {
     return (
       <div style={{ textAlign: "center" }}>
         <Link to="/">
-          <Button>Back to homepage</Button>
+          <Button color="primary" variant="contained">
+            Back to homepage
+          </Button>
         </Link>
         {this.props.bookDetails.map((t, index) => (
           <div key={index}>
@@ -24,7 +26,11 @@ class FetchBooksDetails extends Component {
               <img src={t.image} alt="" />
             </a>
             <h3>{t.price}</h3>
-            <Button onClick={() => this.props.addToCart(t.isbn13)}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => this.props.addToCart(t.isbn13)}
+            >
               Click to buy
             </Button>
           </div>

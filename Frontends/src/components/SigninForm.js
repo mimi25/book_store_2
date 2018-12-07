@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SigninPage from "../containers/SigninPage";
-import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import { registerUser } from "../actions/LogActions";
 
 class SigninForm extends Component {
@@ -11,14 +11,15 @@ class SigninForm extends Component {
   };
 
   render() {
-    const { registerUser } = this.props;
     return (
       <div style={{ textAlign: "center" }}>
         <Link to="/">
-          <Button>Back to homepage</Button>
+          <Button color="primary" variant="contained">
+            Back to homepage
+          </Button>
         </Link>
         <h1>Please enter your details</h1>
-        <SigninPage onSubmit={this.submit} registerUser={registerUser} />
+        <SigninPage onSubmit={this.submit} />
       </div>
     );
   }

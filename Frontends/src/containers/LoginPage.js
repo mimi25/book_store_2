@@ -1,11 +1,11 @@
 import React from "react";
 import { Field, reduxForm, Form } from "redux-form";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Button } from "reactstrap";
+import Button from "@material-ui/core/Button";
 
 let LoginPage = props => {
   const { handleSubmit, pristine, reset, submitting, errors } = props;
-  console.log(errors);
   return (
     <Form onSubmit={handleSubmit}>
       <div style={{ textAlign: "center" }}>
@@ -27,18 +27,36 @@ let LoginPage = props => {
             name="password"
             type="password"
           />
+          {errors.email && (
+            <div className="alert alert-danger">{errors.email}</div>
+          )}
+          {errors.password && (
+            <div className="alert alert-danger">{errors.password}</div>
+          )}
         </div>
         <div>
-          <Button disabled={pristine || submitting} type="submit">
+          <Button
+            color="primary"
+            variant="contained"
+            disabled={pristine || submitting}
+            type="submit"
+          >
             Log in
           </Button>
           <Button
+            color="primary"
+            variant="contained"
             type="button"
             disabled={pristine || submitting}
             onClick={reset}
           >
             Clear Values
           </Button>
+          <Link to="/signin">
+            <Button color="secondary" variant="contained" type="button">
+              I don't have an account
+            </Button>
+          </Link>
         </div>
       </div>
     </Form>
